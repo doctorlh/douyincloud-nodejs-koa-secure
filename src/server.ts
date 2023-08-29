@@ -14,7 +14,7 @@ initService().then(async () => {
 	const app = new Koa();
 
 	const router = new Router();
-	router.post('/api/text/antidirt', async (ctx) => {
+	router.post('/api/text/secure', async (ctx) => {
 		const body : any = ctx.request.body;
 		const content = body.content;
 		const res = await axios.post('http://developer.toutiao.com/api/v2/tags/text/antidirt', {
@@ -30,6 +30,7 @@ initService().then(async () => {
 		const body : any = ctx.request.body;
 		const { image, image_data } = body;
 		const res = await axios.post('http://developer.toutiao.com/api/apps/censor/image', {
+			"appId": "tt28945e29b7a80c7a01",
 			"image": image,
 			"image_data": image_data
 		});
