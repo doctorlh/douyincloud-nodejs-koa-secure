@@ -4,6 +4,7 @@ import Router from '@koa/router'
 import Redis from 'ioredis';
 import mongoose from 'mongoose';
 import assert from "assert";
+import axios from 'axios';
 
 // 初始化各服务的连接 redis, mongo
 async function initService() {
