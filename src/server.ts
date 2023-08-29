@@ -27,10 +27,19 @@ initService().then(async () => {
 			"success": true,
 		}
 	}).post('/api/image/secure', async (ctx) => {
+		const appid = "tt28945e29b7a80c7a01"
+		const tokenRes = await axios.post('http://developer.toutiao.com/api/apps/v2/token', {
+			"appid": appid,
+			"secret": '9ea5904d24e76fe548dab5d764b00e56ebce7d2d',
+			"grant_type": 'client_credential'
+		})
+		const { access_token } = tokenRes.data.data
+		
 		const body : any = ctx.request.body;
 		const { image, image_data } = body;
 		const res = await axios.post('http://developer.toutiao.com/api/apps/censor/image', {
-			"appId": "tt28945e29b7a80c7a01",
+			"app_id": appid,
+			"access_token": access_token,
 			"image": image,
 			"image_data": image_data
 		});
