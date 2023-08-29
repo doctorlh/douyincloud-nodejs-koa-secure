@@ -15,7 +15,7 @@ initService().then(async () => {
 
 	const router = new Router();
 	router.post('/api/text/antidirt', async (ctx) => {
-		const body: any = ctx.request.body;
+		const body : any = ctx.request.body;
 		const content = body.content;
 		const res = await axios.post('http://developer.toutiao.com/api/v2/tags/text/antidirt', {
 			"tasks": [{
@@ -27,10 +27,11 @@ initService().then(async () => {
 			"success": true,
 		}
 	}).post('/api/image/secure', async (ctx) => {
-		const body: any = ctx.request.body;
-		const content = body.content;
-		const res = await axios.post('https://open.douyin.com/api/apps/v1/censor/image', {
-			"image_data": content
+		const body : any = ctx.request.body;
+		const { image, image_data } = body;
+		const res = await axios.post('https://developer.toutiao.com/api/apps/censor/image', {
+			"image": image,
+			"image_data": image_data
 		});
 		ctx.body = {
 			"result": res.data,
@@ -46,4 +47,4 @@ initService().then(async () => {
 		console.log(`Server running on port ${PORT}`);
 	});
 
-}).catch((error: string) => console.log("Init service  error: ", error));
+}).catch((error : string) => console.log("Init service  error: ", error));
